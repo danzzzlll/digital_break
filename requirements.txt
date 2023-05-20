@@ -4,7 +4,7 @@ attrs==23.1.0
 blinker==1.6.2
 brotlipy==0.7.0
 cachetools==5.3.0
-catboost @ https://pypi.org/packages/cp310/c/catboost/catboost-1.0.6-cp310-none-win_amd64.whl
+catboost==1.1.1
 chardet==5.1.0
 charset-normalizer==3.1.0
 click==8.1.3
