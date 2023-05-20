@@ -60,7 +60,7 @@ if file is not None:
         
         return df
 
-    with open('..\models\clf_model.pkl', 'rb') as file:
+    with open('../models/clf_model.pkl', 'rb') as file:
         clf = pickle.load(file)
 
     df = process(df)
@@ -84,7 +84,7 @@ if file is not None:
 # Apply the function to each row to compute the 'final type' column
     df['final_type'] = df.apply(compute_final_type, axis=1)
     
-    sub = pd.read_csv('..\data\submission.csv')
+    sub = pd.read_csv('../data/submission.csv')
     sub['Тип переклассификации'] = df['target']
     sub['Тип обращения итоговый'] = df.final_type
     
