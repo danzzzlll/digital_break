@@ -1,0 +1,77 @@
+altair==4.2.2
+appdirs==1.4.4
+attrs==23.1.0
+blinker==1.6.2
+Bottleneck @ file:///C:/Windows/Temp/abs_3198ca53-903d-42fd-87b4-03e6d03a8381yfwsuve8/croots/recipe/bottleneck_1657175565403/work
+brotlipy==0.7.0
+cachetools==5.3.0
+catboost @ https://pypi.org/packages/cp310/c/catboost/catboost-1.0.6-cp310-none-win_amd64.whl
+certifi @ file:///C:/b/abs_4a0polqwty/croot/certifi_1683875377622/work/certifi
+cffi @ file:///C:/b/abs_49n3v2hyhr/croot/cffi_1670423218144/work
+chardet==5.1.0
+charset-normalizer==3.1.0
+click==8.1.3
+colorama==0.4.6
+contourpy @ file:///C:/b/abs_d5rpy288vc/croots/recipe/contourpy_1663827418189/work
+cryptography @ file:///C:/b/abs_8ecplyc3n2/croot/cryptography_1677533105000/work
+cycler @ file:///tmp/build/80754af9/cycler_1637851556182/work
+decorator==5.1.1
+entrypoints==0.4
+fonttools==4.25.0
+gitdb==4.0.10
+GitPython==3.1.31
+graphviz @ file:///C:/Windows/TEMP/abs_7a4z36rraa/croots/recipe/python-graphviz_1660063185022/work
+idna @ file:///C:/b/abs_bdhbebrioa/croot/idna_1666125572046/work
+importlib-metadata==6.6.0
+Jinja2==3.1.2
+joblib==1.2.0
+jsonschema==4.17.3
+kiwisolver @ file:///C:/b/abs_88mdhvtahm/croot/kiwisolver_1672387921783/work
+markdown-it-py==2.2.0
+MarkupSafe==2.1.2
+matplotlib @ file:///C:/b/abs_49b2acwxd4/croot/matplotlib-suite_1679593486357/work
+mdurl==0.1.2
+mkl-fft==1.3.6
+mkl-random @ file:///C:/Users/dev-admin/mkl/mkl_random_1682977971003/work
+mkl-service==2.4.0
+munkres==1.1.4
+nltk==3.8.1
+numexpr @ file:///C:/b/abs_afm0oewmmt/croot/numexpr_1683221839116/work
+numpy @ file:///C:/Users/dev-admin/mkl/numpy_and_numpy_base_1682982345978/work
+packaging==23.1
+pandas==2.0.1
+Pillow==9.5.0
+plotly @ file:///C:/ci/plotly_1658160673416/work
+pooch @ file:///tmp/build/80754af9/pooch_1623324770023/work
+protobuf==3.20.3
+pyarrow==12.0.0
+pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
+pydeck==0.8.1b0
+Pygments==2.15.1
+Pympler==1.0.1
+pyOpenSSL @ file:///C:/b/abs_552w85x1jz/croot/pyopenssl_1677607703691/work
+pyparsing @ file:///C:/Users/BUILDE~1/AppData/Local/Temp/abs_7f_7lba6rl/croots/recipe/pyparsing_1661452540662/work
+pyrsistent==0.19.3
+PySocks @ file:///C:/ci_310/pysocks_1642089375450/work
+python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
+pytz==2023.3
+regex==2023.5.5
+requests==2.30.0
+rich==13.3.5
+scipy==1.10.1
+six @ file:///tmp/build/80754af9/six_1644875935023/work
+smmap==5.0.0
+streamlit==1.22.0
+tenacity @ file:///C:/b/abs_ddkoa9nju6/croot/tenacity_1682972298929/work
+toml==0.10.2
+toolz==0.12.0
+tornado==6.3.2
+tqdm==4.65.0
+typing_extensions==4.5.0
+tzdata==2023.3
+tzlocal==5.0.1
+urllib3==2.0.2
+validators==0.20.0
+watchdog==3.0.0
+win-inet-pton @ file:///C:/ci_310/win_inet_pton_1642658466512/work
+zipp==3.15.0
