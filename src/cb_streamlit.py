@@ -60,7 +60,7 @@ if file is not None:
         
         return df
 
-    with open('CP\clf_model.pkl', 'rb') as file:
+    with open('..\models\clf_model.pkl', 'rb') as file:
         clf = pickle.load(file)
 
     df = process(df)
@@ -84,7 +84,7 @@ if file is not None:
 # Apply the function to each row to compute the 'final type' column
     df['final_type'] = df.apply(compute_final_type, axis=1)
     
-    sub = pd.read_csv('CP\submission.csv')
+    sub = pd.read_csv('..\data\submission.csv')
     sub['Тип переклассификации'] = df['target']
     sub['Тип обращения итоговый'] = df.final_type
     
@@ -134,10 +134,10 @@ if file is not None:
         st.plotly_chart(fig, use_container_width=True)
         
         
-        with open('CP/file.pkl', 'rb') as file:
+        with open('../models/file.pkl', 'rb') as file:
             X_2d = pickle.load(file)
 
-        with open('CP/labels.pkl', 'rb') as file:
+        with open('../models/labels.pkl', 'rb') as file:
             anomaly_labels = pickle.load(file)
             
         fig = go.Figure(data=go.Scatter(
