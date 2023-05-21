@@ -18,11 +18,13 @@ import altair as alt
 import plotly.express as px
 import plotly.graph_objects as go
 
-file = st.file_uploader("Upload .csv file")
+file = st.file_uploader("Upload test.csv file")
 
 
 if file is not None:
+    
     df = pd.read_csv(file)
+
     # st.write(df)
 
     
@@ -63,6 +65,7 @@ if file is not None:
         return df
 
     with open("/app/digital_break/models/clf_model.pkl", 'rb') as file:
+    # with open("models/clf_model.pkl", 'rb') as file:
         clf = pickle.load(file)
 
     df = process(df)
@@ -82,15 +85,16 @@ if file is not None:
         else:
             return None
         
-    st.write(df)
+    # st.write(df)
 # Apply the function to each row to compute the 'final type' column
     df['final_type'] = df.apply(compute_final_type, axis=1)
     
     sub = pd.read_csv("/app/digital_break/data/submission.csv")
+    # sub = pd.read_csv("data/submission.csv")
     sub['Тип переклассификации'] = df['target']
     sub['Тип обращения итоговый'] = df.final_type
     
-    st.write(sub)
+    # st.write(sub)
 
     def convert_df(df):
         return df.to_csv(index=False).encode('utf-8')
@@ -108,71 +112,63 @@ if file is not None:
     st.altair_chart(chart, use_container_width=True, theme='streamlit')
     
     
-    file_2 = st.file_uploader("Upload another .csv file")
+    # file_2 = st.file_uploader("Upload another .csv file")
     
-    if file_2 is not None:
-        df = pd.read_csv(file_2)
-        df = process_for_anomalies(df)
+    
+    df = pd.read_csv('"/app/digital_break/data/train.csv"')
+    df = process_for_anomalies(df)
 
-        threshold = st.slider('Pick a threshold', 5, 100, 5)
-        # threshold = 40  # set this to a suitable value
-        lst = df.content.value_counts().index.values.tolist()
-        grouped_df = df[(df.content.isin(lst))].groupby(['content', pd.Grouper(key='application_date', freq='H')]).size()
-        burst_activity = grouped_df[grouped_df >= threshold]
-        all_activity = grouped_df[grouped_df > 0]
-        burst_activity = burst_activity.reset_index(name='count')
-        all_activity = all_activity.reset_index(name='count')
-        burst_activity = burst_activity.sort_values(by='application_date')
-        all_activity = all_activity.sort_values(by='application_date')
-        st.write(all_activity)
-        
-        fig = px.line(all_activity[all_activity.content.isin(list(burst_activity.content.values))], x='application_date', y='count', color='content')
-        fig.update_layout(
-            autosize=False,
-            height=600,
-            width=600,
-            xaxis_title='Time',
-            yaxis_title='Report Count',
-            legend=dict(
-                orientation="h",  # Horizontal legend
-                yanchor="bottom",  # Anchor legend at the bottom
-                y=1.02,  # Place legend slightly above the figure's top
-                xanchor="right",  # Anchor legend at the right
-                x=1  # Place legend at the figure's right
-            )
+    threshold = st.slider('Pick a threshold', 5, 100, 5)
+    # threshold = 40  # set this to a suitable value
+    lst = df.content.value_counts().index.values.tolist()
+    grouped_df = df[(df.content.isin(lst))].groupby(['content', pd.Grouper(key='application_date', freq='H')]).size()
+    burst_activity = grouped_df[grouped_df >= threshold]
+    all_activity = grouped_df[grouped_df > 0]
+    burst_activity = burst_activity.reset_index(name='count')
+    all_activity = all_activity.reset_index(name='count')
+    burst_activity = burst_activity.sort_values(by='application_date')
+    all_activity = all_activity.sort_values(by='application_date')
+    st.write(all_activity)
+    
+    fig = px.line(all_activity[all_activity.content.isin(list(burst_activity.content.values))], x='application_date', y='count', color='content')
+    fig.update_layout(
+        autosize=False,
+        height=600,
+        width=600,
+        xaxis_title='Time',
+        yaxis_title='Report Count',
+        legend=dict(
+            orientation="h",  # Horizontal legend
+            yanchor="bottom",  # Anchor legend at the bottom
+            y=1.02,  # Place legend slightly above the figure's top
+            xanchor="right",  # Anchor legend at the right
+            x=1  # Place legend at the figure's right
         )
-        fig.update_traces(mode='lines+markers', marker=dict(size=5))
-        st.plotly_chart(fig, use_container_width=True)
-        
-        
-        with open("/app/digital_break/models/file.pkl", 'rb') as file:
-            X_2d = pickle.load(file)
+    )
+    fig.update_traces(mode='lines+markers', marker=dict(size=5))
+    st.plotly_chart(fig, use_container_width=True)
+    
+    
+    with open("/app/digital_break/models/file.pkl", 'rb') as file:
+    # with open("models/file.pkl", 'rb') as file:
+        X_2d = pickle.load(file)
 
-        with open("/app/digital_break/models/labels.pkl", 'rb') as file:
-            anomaly_labels = pickle.load(file)
-            
-        fig = go.Figure(data=go.Scatter(
-            x = X_2d[:, 0],
-            y = X_2d[:, 1],
-            mode='markers',  # Линии и маркеры
-            text=df['content'].values,  # Подписи
-            marker=dict(
-            size=8,
-            color=['red' if anomaly == -1 else 'blue' for anomaly in anomaly_labels],  # Красные для аномалий, синие для обычных точек
-                )
-                ))
-
-        fig.update_traces(textposition='top center')
-
-        # st.plotly_chart(fig, use_container_width=True)
+    with open("/app/digital_break/models/labels.pkl", 'rb') as file:
+    # with open("models/labels.pkl", 'rb') as file:
+        anomaly_labels = pickle.load(file)
         
-        names = ['(02.12) Прекращение доступа в Система500', 'Часы.', 
-                 'Письмо RandomKKKK', 'Письмо Random4945Заявка', '<Бот-наблюдения> Система110Ведение НСИ . Ухудшение статуса сервиса.  ',
-                 '(Копия) testing 123',
-                 'Система26',
-                 ' АА',
-                 'Зеркало, жалюзи',
-                 '(22.12) Изменение логического доступа',
-                 ' 4эт',
-                 ' Система8']
-        st.write(names)
+    fig = go.Figure(data=go.Scatter(
+        x = X_2d[:, 0],
+        y = X_2d[:, 1],
+        mode='markers',  # Линии и маркеры
+        text=df['content'].values,  # Подписи
+        marker=dict(
+        size=8,
+        color=['red' if anomaly == -1 else 'blue' for anomaly in anomaly_labels],  # Красные для аномалий, синие для обычных точек
+            )
+            ))
+
+    fig.update_traces(textposition='top center')
+
+    st.plotly_chart(fig, use_container_width=True)
+        
