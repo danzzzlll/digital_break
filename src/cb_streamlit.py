@@ -1,4 +1,5 @@
 
+from fileinput import filename
 import pandas as pd
 import numpy as np
 import streamlit as st
@@ -89,6 +90,12 @@ if file is not None:
     sub['Тип обращения итоговый'] = df.final_type
     
     st.write(sub)
+
+    st.download_button(
+        label="Download predictions",
+        data=sub,
+        filename='test_predictions.csv'
+    )
     
     df_imp = pd.DataFrame({'feature':clf.feature_names_, 'importance':clf.feature_importances_})
     
