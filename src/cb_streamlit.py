@@ -115,7 +115,7 @@ if file is not None:
     # file_2 = st.file_uploader("Upload another .csv file")
     
     
-    df = pd.read_csv('"/app/digital_break/data/train.csv"')
+    df = pd.read_csv("/app/digital_break/data/train.csv")
     df = process_for_anomalies(df)
 
     threshold = st.slider('Pick a threshold', 5, 100, 5)
