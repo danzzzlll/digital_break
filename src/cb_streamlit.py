@@ -94,7 +94,7 @@ if file is not None:
     st.download_button(
         label="Download predictions",
         data=sub,
-        filename='test_predictions.csv'
+        file_name='test_predictions.csv'
     )
     
     df_imp = pd.DataFrame({'feature':clf.feature_names_, 'importance':clf.feature_importances_})
