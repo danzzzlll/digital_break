@@ -1,5 +1,6 @@
 
 from fileinput import filename
+from operator import index
 import pandas as pd
 import numpy as np
 import streamlit as st
@@ -92,7 +93,7 @@ if file is not None:
     st.write(sub)
 
     def convert_df(df):
-        return df.to_csv().encode('utf-8')
+        return df.to_csv(index=False).encode('utf-8')
 
     st.download_button(
         label="Download predictions",
